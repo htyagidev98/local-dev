@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/cosmo/bootstrap.min.css" integrity="sha384-5QFXyVb+lrCzdN228VS3HmzpiE7ZVwLQtkt+0d9W43LQMzz4HBnnqvVxKg6O+04d" crossorigin="anonymous"> -->
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" type="text/css" media="print" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">  -->
+
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous"> -->
+
+    <style type="text/css">
+        table { page-break-inside:auto }
+        tr    { page-break-inside:avoid; page-break-after:auto }
+        thead { display:table-header-group }
+        tfoot { display:tenter code hereable-footer-group }
+    </style>
+   
+</head>
+
+
+
+<body class="page" style="font-family: Roboto, sans-serif;">
+    <div class="container">
+
+           
+
+<div class="row">
+    <div class="col-xs-4">
+        <img src="https://s3.ap-south-1.amazonaws.com/careager/avatar/b3649a10-ff51-11ea-a712-8b00186d1c08.jpeg"  height="150px;" width="150px"alt="">
+        <h4>PROFORMA INVOICE</h4>
+       <h6> Job No : #<%= booking.booking_no %></h6>
+       <% var info  = booking.date; %>
+        <h6> <strong>Job Date</strong> : <%=`${moment(info).format('MMM, DD YYYY h:mm A')}` %> </h6>
+       
+        <h6><strong>Invoice Date</strong> : <%= moment().format('MMM, DD YYYY h:mm A') %>  </h6>
+    </div>
+    <div class="col-xs-5">
+<h5><%= business.name %></h5>
+<h5>Victorious Managers Group Private Limited</h5>
+
+
+
+<p style="font-size: 13px;"><%= business.contact_no %></p>
+<p style="font-size: 13px;"><%= business.email %></p>
+<p style="font-size: 13px;"><%= business.address.location %></p>
+<h6 >GSTIN : 06AAECV9058N1ZM </h6>
+    </div>
+
+    <div class="col-xs-3">
+        <h6>Proforma Invoice To: <h6> <%= booking.user.name %> </h6></h6>
+        
+        <h6><%= booking.user.contact_no %></h6>
+        <h6><%= address.address %></h6>
+        <h6><%= `${address.city} ${address.state} ${address.zip}` %></h6>
+        
+        
+
+    </div>
+
+</div>
+
+
+
+
+
+        </div>
+        
+        <hr style="display: block;
+        height: 1px;
+        background: transparent;
+        width: 100%;
+        border: none;
+        border-top: solid 1px #aaa;">
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-4">
+            <h6> <%= booking.car.title%></h6>
+            <h6>REG NO :<%=booking.car.registration_no %></h6>
+        </div>
+
+        <div  class="col-xs-4">
+            <h6>VIN : <%= booking.car.vin %> </h6>
+            <%= console.log(booking.car.vin) %>
+            <%= console.log(booking.car.vin ) %>
+            <h6>Engine No : <%= booking.car.engine_no %></h6>
+        </div>
+        <div class="col-xs-4">
+            <h6>KMS : <%= booking.odometer %></h6>
+            
+        </div>
+        
+    </div>
+</div>
+<br>
+
+<% var parts = 0 %>
+
+<% var labour = 0 %>
+<% var fitting = 0 %>
+
+<% var service = booking.services; %>
+
+       
+        <% var partsArray = [];%>
+        <% var labourArray = [] ; %>
+        <% var open_fittingArray = [] ; %>
+
+
+
+        <% for(var i=0; i < service.length; i++) { %>
+            <%  for(var j=0; j < service[i].parts.length;j++) { %>
+
+                <%  parts =service[i].parts.length  %>
+
+           <% partsArray.push({
+               item:service[i].parts[j].item,
+               hsn_sac:service[i].parts[j].hsn_sac,
+                quantity: service[i].parts[j].quantity,
+                rate:service[i].parts[j].rate,
+                base:service[i].parts[j].base,
+               discount: service[i].parts[j].discount,
+                tax: service[i].parts[j].tax,
+                tax_amount: service[i].parts[j].tax_amount,
+                amount:service[i].parts[j].amount
+    }) %>
+
+
+
+           <% } %>
+
+          
+            <%  for(var j=0; j < service[i].labour.length;j++) { %>
+
+                <%  labour =service[i].labour.length  %>
+        
+           <% labourArray.push({
+               item:service[i].labour[j].item,
+               hsn_sac:service[i].labour[j].hsn_sac,
+                quantity: service[i].labour[j].quantity,
+                rate:service[i].labour[j].rate,
+                base:service[i].labour[j].base,
+               discount: service[i].labour[j].discount,
+                tax: service[i].labour[j].tax,
+                tax_amount: service[i].labour[j].tax_amount,
+                amount:service[i].labour[j].amount
+    }) %>
+
+           <% } %>
+
+
+
+           <%  for(var j=0; j < service[i].opening_fitting.length;j++) { %>
+
+            <%  fitting =service[i].opening_fitting.length  %>
+
+       <% open_fittingArray.push({
+           item:service[i].opening_fitting[j].item,
+           hsn_sac:service[i].opening_fitting[j].hsn_sac,
+            quantity: service[i].opening_fitting[j].quantity,
+            rate:service[i].opening_fitting[j].rate,
+            base:service[i].opening_fitting[j].base,
+           discount: service[i].opening_fitting[j].discount,
+            tax: service[i].opening_fitting[j].tax,
+            tax_amount: service[i].opening_fitting[j].tax_amount,
+            amount:service[i].opening_fitting[j].amount
+}) %>
+
+       <% } %>
+
+
+
+
+           <% } %>
+
+                        
+
+
+<% if(parts !==  0){ %>
+    
+   
+<div class="container">
+
+    <div class="row">
+        <div class="col-xs-12">
+
+
+            <table class="table-borderless" >
+                <thead class="">
+                    
+                    <tr>
+                        <th>S.No.</th>
+                        <th>PARTICULARS OF PARTS</th>
+                        <th>HSN/SAC</th>
+                        <th>QTY</th>
+                        <th>RATE</th>
+                        <th>BASE</th>
+                        <th>DISCOUNT</th>
+                        <th >TAX</th>
+                        <th >T/A</th>
+                        <!-- <th
+                            >
+                            DEPRECIATION</th>
+                        <th
+                            >
+                            DEPRECIATION</th> -->
+                        <th>AMOUNT</th>
+                    </tr>
+                </thead>
+                <tbody class="text-muted">
+                   
+                   
+                    
+
+
+
+                       <% for(var i = 0; i<partsArray.length;i++){%>
+                       <tr style="color:#000000!important">
+                       
+                           <td width="2%"><%= i+1 %></td>
+                           
+                           
+                        
+                        
+                      
+                        <td scope="row" width="32%">
+                            <%=partsArray[i].item %>
+                            
+                        </td>
+                        
+                       
+                        <td width="12%">
+                            <%=partsArray[i].hsn_sac %> 
+                           
+                        </td>
+                      <td width="6%">
+                        <%=partsArray[i].quantity %> 
+                        
+                      </td>  
+                    
+                    
+                        <td width="10%">
+                                <%=partsArray[i].rate %> 
+                               
+                            </td>
+                        <td width="9%">
+                                <%=partsArray[i].base %> 
+                                
+                            
+                            </td>
+                        <td width="10%" > 
+                                <%=partsArray[i].discount %> 
+                                
+                            </td>
+               
+                            <td width="13%">
+                            <%=partsArray[i].tax %> 
+                            
+                        </td>
+                        <td width="13%">
+                                <%=partsArray[i].tax_amount %> 
+                                
+                            </td class= "text-muted">
+                        <td  width="10%">
+                            <%=partsArray[i].amount.toFixed() %> 
+                                
+                        </td>
+                            
+                        <% }%>
+                        <!-- <td >
+                            <span ></span>
+                            <span >&nbsp;&nbsp;&nbsp;&nbsp;-</span>
+                        </td>
+                        <td><img src="http://autroid.com/assets/images/icons/rupee.svg" width="12"
+                                height="12"> </td> -->
+                    </tr>
+                    
+
+                  
+                   
+                </tbody>
+                </table>
+
+
+        </div>
+    </div>
+
+
+</div>
+<br> <br> <br>
+
+<% }   if(labour !== 0){ %>
+    
+   
+    <div class="container">
+
+        <div class="row">
+            <div class="col-xs-12">
+    
+    
+                <table class="table-borderless mt-4" >
+                    <thead class="">
+                         
+                        <tr>
+                            
+                            <th>S.No.</th>
+                            <th>PARTICULARS 
+                                OF LABOUR</th>
+                            <th>HSN/SAC</th>
+                            <th>QTY</th>
+                            <th>RATE</th>
+                            <th>BASE</th>
+                            <th>DISCOUNT</th>
+                            <th >TAX</th>
+                            <th >T/A</th>
+                            <!-- <th
+                                >
+                                DEPRECIATION</th>
+                            <th
+                                >
+                                DEPRECIATION</th> -->
+                            <th>AMOUNT</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% for(var i = 0; i<labourArray.length;i++){%>
+
+                      
+                        <tr style="color:#000000!important">
+                            <td width = "2%">
+                                <%= i+1 %>
+                            </td>
+                            <td scope="row" width="32%">
+                                <%=labourArray[i].item %>
+                                
+                            </td >
+                            <td width="9%">
+                                <%=labourArray[i].hsn_sac %> 
+                                
+                            </td>
+                          <td width="6%">
+                            <%=labourArray[i].quantity %> 
+                           
+                          </td>  
+                        
+                        
+                            <td width="10%">
+                                    <%=labourArray[i].rate %> 
+                                    
+                                </td>
+                            <td width="9%">
+                                    <%=labourArray[i].base %> 
+                                   
+                                
+                                </td>
+                            <td width="10%">
+                                    <%=labourArray[i].discount %> 
+                                    
+                                </td>
+                    
+                            <td width="13%" class="text-muted">
+                                <%=labourArray[i].tax %> 
+                                
+                            </td>
+                            <td  width="13%">
+                                    <%=labourArray[i].tax_amount %> 
+                                    
+                                </td>
+                            <td  width="10%">
+                                <%=labourArray[i].amount.toFixed() %> 
+                                    
+                            </td>
+                                
+                            <!-- <td >
+                                <span ></span>
+                                <span >&nbsp;&nbsp;&nbsp;&nbsp;-</span>
+                            </td>
+                            <td><img src="http://autroid.com/assets/images/icons/rupee.svg" width="12"
+                                    height="12"> </td> -->
+                        </tr>
+                        <% } %>
+                       
+                        
+                    </tbody>
+                    </table>
+    
+    
+            </div>
+        </div>
+    
+    
+    </div>
+    
+    <br><br> <br>
+    <% }   if(fitting !== 0){ %>
+       
+        <div class="container">
+
+            <div class="row">
+                <div class="col-xs-12">
+        
+        
+                    <table class="table-borderless mt-4" >
+                        <thead class="">
+                             
+                            <tr>
+                                
+                                <th>S.No.</th>
+                                <th>PARTICULARS OF 
+                                    OUTSOURCED</th>
+                                <th>HSN/SAC</th>
+                                <th>QTY</th>
+                                <th>RATE</th>
+                                <th>BASE</th>
+                                <th>DISCOUNT</th>
+                                <th >TAX</th>
+                                <th >T/A</th>
+                                <!-- <th
+                                    >
+                                    DEPRECIATION</th>
+                                <th
+                                    >
+                                    DEPRECIATION</th> -->
+                                <th>AMOUNT</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% for(var i = 0; i<open_fittingArray.length;i++){%>
+                            
+                            <tr style="color:#000000!important">
+                                <td  width="2%"> <%= i+1 %> </td>
+                                <td scope="row" width="32%">
+                                    <%=open_fittingArray[i].item %>
+                                    
+                                    
+                                </td >
+                                <td width="9%">
+                                    <%=open_fittingArray[i].hsn_sac %> 
+                                    
+                                </td>
+                              <td width="6%">
+                                <%=open_fittingArray[i].quantity %> 
+                               
+                              </td>  
+                            
+                            
+                                <td width="10%">
+                                        <%=open_fittingArray[i].rate %> 
+                                        
+                                    </td>
+                                <td width="9%">
+                                        <%=open_fittingArray[i].base %> 
+                                       
+                                    
+                                    </td>
+                                <td width="10%">
+                                        <%=open_fittingArray[i].discount %> 
+                                        
+                                    </td>
+                        
+                                <td width="13%" class="text-muted">
+                                    <%=open_fittingArray[i].tax %> 
+                                    
+                                </td>
+                                <td  width="13%">
+                                        <%=open_fittingArray[i].tax_amount %> 
+                                        
+                                    </td>
+                                <td width="10%">
+                                    <%=open_fittingArray[i].amount.toFixed() %> 
+                                        
+                                </td >
+                                    
+                                <!-- <td >
+                                    <span ></span>
+                                    <span >&nbsp;&nbsp;&nbsp;&nbsp;-</span>
+                                </td>
+                                <td><img src="http://autroid.com/assets/images/icons/rupee.svg" width="12"
+                                        height="12"> </td> -->
+                            </tr>
+                           
+                            <% } %>
+                            
+                        </tbody>
+                        </table>
+        
+        
+                </div>
+            </div>
+        
+        
+        </div>
+
+                    
+
+
+<% } else { %>
+    <p> </p>
+    <% } %>
+
+    <br>
+<div class="container">
+
+<div class="row">
+<div class="col-xs-2">
+
+    
+    <img src="https://s3.ap-south-1.amazonaws.com/careager/avatar/76c9c5c0-74f0-11eb-8228-c577636c7b80.jpeg"
+        class="img-responsive ml-2" alt="QR Code" width="140px">
+        <!-- <span class="text-left ml-4 font-weight-bold font-15" style="color: black; padding-left: 0px;">To Pay Using any
+            UPI enabled app
+    
+        </span> -->
+
+</div>
+
+<div class="col-xs-7">
+    <p class="" style="padding-left: 10px; font-weight: bold; font-size: 13px;">To Pay Using anyUPI enabled app</p>
+    <p class="" style="  font-weight: bold; font-size: 14px;">Victorious Managers' Group Pvt Ltd</p>
+    <p style=" margin-top: -7px;">Bank : <%= business.bank_details[0].bank %></p>
+    <p style=" margin-top: -7px;">A/C No : <%=business.bank_details[0].account_no %> </p>
+    <p style=" margin-top: -7px;">IFSC : <%= business.bank_details[0].ifsc %></p>
+
+
+</div>
+<div class="col-xs-3">
+    <p style=" font-size: 13px;">Parts Subtotal : <%= booking.payment.part_cost.toLocaleString() %> </p>
+    <p style=" font-size: 13px;  margin-top: -10px;">Labour Subtotal : <%= booking.payment.labour_cost.toLocaleString() %></p>
+    <p style=" font-size: 13px;  margin-top: -10px;" >Other Subtotal : <%= booking.payment.of_cost.toLocaleString() %> </p>
+   <%  if(booking.payment.pick_up_charges !== 0){ %> 
+
+    <p style=" font-size: 13px;  margin-top: -10px;">Pick Up Charges : <%= booking.payment.pick_up_charges.toLocaleString() %></p>
+    
+
+   <%  } %> 
+   
+    <% var partsTaxF = 0; %>
+    <% var partsTaxS = 0; %>
+    <% var partsTaxT = 0; %>
+
+    <% var labourTaxF = 0; %>
+    <% var labourTaxS = 0; %>
+    <% var labourTaxT = 0; %>
+
+    <% var openTaxF = 0; %>
+    <% var openTaxS = 0; %>
+    <% var openTaxT = 0; %>
+
+
+
+    <% for(var i=0; i < service.length; i++) { %>
+
+
+        <%  for(var j=0; j < service[i].parts.length;j++) { %>
+
+            <%  if(service[i].parts[j].tax== '18.0% GST'){%>
+
+               
+                <% partsTaxF +=  service[i].parts[j].tax_amount/2; %>
+
+                <%  } if(service[i].parts[j].tax=='28.0% GST'){ %>
+
+                    <% partsTaxS +=  service[i].parts[j].tax_amount/2; %>
+
+                    
+                    <% } if(service[i].parts[j].tax=='5.0% GST'){ %>
+
+                        <% partsTaxT +=  service[i].parts[j].tax_amount/2;%>
+            
+
+
+                        <% } %>
+            
+            <% } %>
+
+            <%  for(var j=0; j < service[i].labour.length;j++) { %>
+
+                <%  if(service[i].labour[j].tax== '18.0% GST'){%>
+
+               
+                    <% labourTaxF +=  service[i].labour[j].tax_amount/2; %>
+    
+                    <%  } if(service[i].labour[j].tax=='28.0% GST'){ %>
+    
+                        <% labourTaxS +=  service[i].labour[j].tax_amount/2; %>
+    
+                        
+                        <% } if(service[i].labour[j].tax=='5.0% GST'){ %>
+    
+                            <% labourTaxT +=  service[i].labour[j].tax_amount/2;%>
+                
+    
+    
+                            <% } %>
+                
+            
+                            <% } %>
+
+
+
+
+                            <%  for(var j=0; j < service[i].opening_fitting.length;j++) { %>
+
+                                <%  if(service[i].opening_fitting[j].tax== '18.0% GST'){%>
+                
+                               
+                                    <% openTaxF +=  service[i].opening_fitting[j].tax_amount/2; %>
+                    
+                                    <%  } if(service[i].opening_fitting[j].tax=='28.0% GST'){ %>
+                    
+                                        <% openTaxS +=  service[i].opening_fitting[j].tax_amount/2; %>
+                    
+                                        
+                                        <% } if(service[i].opening_fitting[j].tax=='5.0% GST'){ %>
+                    
+                                            <% openTaxT +=  service[i].opening_fitting[j].tax_amount/2;%>
+                                
+                    
+                    
+                                            <% } %>
+                                
+                            
+                                            <% } %>
+
+
+
+                            <% } %>
+
+                            <% var totalF= partsTaxF+ labourTaxF+ openTaxF; %>
+                            <% var totalS= partsTaxS+ labourTaxS+ openTaxS; %>
+                            <% var totalT= partsTaxT+ labourTaxT+ openTaxT; %>
+
+                                            <% totalF.toFixed(2)%>
+                                            <% totalS.toFixed(2)%>
+                                            <% totalT.toFixed(2)%>
+
+          <% if(totalF !== 0) { %>                                   
+    <p style=" font-size: 13px; margin-top: -10px;">9% CGST : <%= totalF.toLocaleString() %></p>
+    <p style=" font-size: 13px;  margin-top: -10px;">9% SGST : <%=  totalF.toLocaleString() %></p>
+    
+    <% } if(totalT !== 0) { %> 
+    <p style=" font-size: 13px;  margin-top: -10px;">2.5% CGST : <%=  totalT.toLocaleString() %></p>
+    <p style=" font-size: 13px; margin-top: -10px;" >2.5% SGST : <%=  totalT.toLocaleString() %></p>
+    <% } if(totalS !== 0){ %> 
+    <p style=" font-size: 13px;  margin-top: -10px;">14% CGST : <%=  totalS.toLocaleString() %> </p>
+    <p style=" font-size: 13px;  margin-top: -10px;">14% SGST :  <%=  totalS.toLocaleString() %>  </p>
+<% } %> 
+
+    <p style=" font-size: 13px;  margin-top: -10px;">Total : <%= booking.payment.total.toLocaleString() %></p>
+    <% if (booking.payment.discount_total !== 0) { %>
+        <p style=" font-size: 13px;  margin-top: -10px;">Discount : <%= booking.payment.discount_total %></p>
+    <% } %>
+
+    <p style=" font-size: 13px;  margin-top: -10px;">Payable Amount : <%= booking.due.due.toLocaleString() %></p>
+    
+
+</div>
+
+</div>
+<br>
+<p style="font-weight: bold;">There might be a slight variation in the parts/labor charges, but the total amount reflected in the booking system cannot exceed the final invoice amount for the mentioned services. 'There are no Pick-N-Drop charges for orders above ₹5000'</p>
+
+
+</div>
+
+
+
+
+             
+
+<br><br> <br>
+<footer>
+    <div class="container"> 
+        <div class="row">
+<div class="col-xs-4">
+
+    <p style="text-align: left;">
+        Customer Signature
+    </p>
+</div>
+    <div class="col-xs-5">
+        <p style="text-align: center;"> 
+            General Manager Signature
+        </p>
+    </div>
+
+    <div class="col-xs-3">
+        <p style="text-align: center;"> 
+            Authorised Signature
+
+        </p>
+    </div>
+    
+
+</div>
+
+
+            
+        </div>
+       
+
+    
+
+
+</footer>
+
+
+
+
+
+</body>
+</html>

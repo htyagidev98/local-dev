@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Meta -->
+    <meta name="description" content="CarEager Console">
+    <meta name="author" content="CarEager">
+
+    <title>CE Suite Authentication</title>
+
+    <!-- vendor css -->
+    <link href="{% static 'assets/lib/font-awesome/css/font-awesome.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/lib/Ionicons/css/ionicons.css' %}" rel="stylesheet">
+
+    <!-- Bracket CSS -->
+    <link rel="stylesheet" href="{% static 'assets/css/bracket.css' %}">
+  </head>
+
+  <body>
+
+    <div class="d-flex align-items-center justify-content-center bg-br-primary ht-100v">
+
+      <div class="login-wrapper wd-300 wd-xs-350 pd-25 pd-xs-40 bg-white rounded shadow-base">
+        <div class="signin-logo tx-center tx-28 tx-bold tx-inverse"><span class="tx-normal">[</span> CarEager Suite <span class="tx-normal">]</span></div>
+        <div class="tx-center mg-b-60">Company Owned, Premium Car Dealerships</div>
+		
+    		{% if messages %}
+    			{% for message in messages %}
+    			   <p>{{ message }}</p>
+    			{% endfor %}
+    		{% endif %}
+        
+        <form method="POST" action=".">
+        	<div class="form-group">
+              {{form.contact_no}}
+            </div>
+            <div class="form-group">
+              {{form.password}}
+            </div>
+            {% csrf_token %}
+            <button type="submit" class="btn btn-info btn-block">Sign In</button>    
+        </form>
+        
+      </div><!-- login-wrapper -->
+    </div><!-- d-flex -->
+
+    <script src="{% static 'assets/lib/jquery/jquery.js' %}"></script>
+    <script src="{% static 'assets/lib/popper.js/popper.js' %}"></script>
+    <script src="{% static 'assets/lib/bootstrap/bootstrap.js' %}"></script>
+
+  </body>
+</html>

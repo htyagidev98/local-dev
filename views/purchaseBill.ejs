@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title style="font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;">PurchaseBills</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+<body class="page" style="font-family: Roboto, sans-serif;">
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col-xs-12" >
+                <div class="text-center mb-3">
+                    <h3 style="color: #000000;">Purchase Bill
+                        <span></span>
+                    </h3>
+                </div>
+            </div>
+        </div>
+<br>
+<div class="row">
+<div class="col-xs-4">
+    <% if (business.business_info.company_logo !== '') { %>
+     
+   
+    <img src= "<%=  business.business_info.company_logo%>" height="150px;" width="150px"alt="">
+    <% } %>
+    <h4>Bill #<%=p.reference_no %></h4>
+    <h5>Bill Date : <%= moment(p.date).format('MMM, DD YYYY h:mm A') %></h5>
+    
+    
+    
+</div>
+
+<div class="col-xs-3">
+    <h6>Bill From : <h6> <%= user.name %> </h6></h6>
+    
+    <h6><%= user.contact_no %></h6>
+    <% if (address) { %>
+        <h6><%= address.address %></h6>
+        <h6><%= `${address.city} ${address.state} ${address.zip}` %></h6>
+    <% } %>
+    <% if (user.business_info.gstin !== '') { %>
+        <h6>GSTIN : <%= user.business_info.gstin %> </h6>
+    <% } %>
+</div>
+
+<div class="col-xs-2">
+
+</div>
+
+<div class="col-xs-3">
+    
+    <h6>Bill To : <h6> <%= business.name %> </h6></h6>
+    
+    <h6><%= business.contact_no %></h6>
+    <% if (business.address) { %>
+        <h6><%= business.address.address %></h6>
+        <h6><%= `${ business.address.city} ${ business.address.state} ${ business.address.zip}` %></h6>
+    <% } %>
+    <% if (business.business_info.gstin !== '') { %>
+        <h6>GSTIN : <%= business.business_info.gstin %> </h6>
+    <% } %>
+</div>
+    
+
+</div>
+
+</div>
+
+
+    </div>
+    <hr style="display: block;
+    height: 1px;
+    background: transparent;
+    width: 100%;
+    border: none;
+    border-top: solid 1px #aaa;">
+
+
+<!-- <div class="container">
+    <div class="row">
+        <div class="col-xs-4">
+            <h6> Order No : #</h6>
+            
+        </div>
+
+        <div  class="col-xs-4">
+            <h6>Order Date : </h6>
+           
+        </div>
+        <div class="col-xs-4">
+            
+        </div>
+        
+    </div>
+</div> -->
+
+<br> <br> <br>
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col-xs-12">
+    
+    
+                <table class="table-borderless" >
+                    <thead class="">
+                        
+                        <tr>
+                            <th>S.No.</th>
+                            <th>PARTICULARS OF PARTS</th>
+                            <th>HSN/SAC</th>
+                            <th>QTY</th>
+                            <th>RATE</th>
+                            <th>BASE</th>
+                            <th>DISCOUNT</th>
+                            <th >TAX</th>
+                            <th >T/A</th>
+                            <!-- <th
+                                >
+                                DEPRECIATION</th>
+                            <th
+                                >
+                                DEPRECIATION</th> -->
+                            <th>AMOUNT</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-muted">
+                       
+                       
+                        
+    
+    
+    
+                           <% for(var i = 0; i<partsArray.length;i++){%>
+
+                           <tr style="color:#000000!important">
+                           
+                               <td width="4%"><%= i+1 %></td>
+                               
+                               
+                            
+                            
+                          
+                            <td scope="row" width="32%">
+                                <%=partsArray[i].title %>
+                                
+                            </td>
+                            
+                           
+                            <td width="12%">
+                                <%=partsArray[i].hsn_sac %> 
+                               
+                            </td>
+                          <td width="6%">
+                            <%=partsArray[i].quantity %> 
+                            
+                          </td>  
+                        
+                        
+                            <td width="10%">
+                                ₹ <%=partsArray[i].rate %> 
+                                   
+                                </td>
+                            <td width="9%">
+                                ₹ <%=partsArray[i].base %> 
+                                    
+                                
+                                </td>
+                            <td width="10%" > 
+                                ₹ <%=partsArray[i].discount %> 
+                                    
+                                </td>
+                   
+                                <td width="10%">
+                                <%=partsArray[i].tax %> 
+                                
+                            </td>
+                            <td width="10%">
+                                ₹ <%=partsArray[i].tax_amount %> 
+                                    
+                                </td class= "text-muted">
+                            <td  width="10%">
+                                ₹ <%=partsArray[i].amount.toFixed() %> 
+                                    
+                            </td>
+                                
+                            <% }%>
+                            <!-- <td >
+                                <span ></span>
+                                <span >&nbsp;&nbsp;&nbsp;&nbsp;-</span>
+                            </td>
+                            <td><img src="http://autroid.com/assets/images/icons/rupee.svg" width="12"
+                                    height="12"> </td> -->
+                        </tr>
+                        
+    
+                      
+                       
+                    </tbody>
+                    </table>
+    
+    
+            </div>
+        </div>
+    
+    
+    </div>
+
+    <br><br> <br>
+
+    <% var partsTaxF = 0; %>
+    <% var partsTaxS = 0; %>
+    <% var partsTaxT = 0; %>
+    <% var itemBase = 0; %>
+
+
+    <%  for(var i=0; i < partsArray.length;i++) { %>
+
+        <% itemBase += partsArray[i].base ;%>
+
+        <%  if(partsArray[i].tax== '18.0% GST'){%>
+
+           
+            <% partsTaxF +=  partsArray[i].tax_amount/2; %>
+
+            <%  } if(partsArray[i].tax=='28.0% GST'){ %>
+
+                <% partsTaxS +=  partsArray[i].tax_amount/2; %>
+
+                
+                <% } if(partsArray[i].tax=='5.0% GST'){ %>
+
+                    <% partsTaxT +=  partsArray[i].tax_amount/2;%>
+        
+
+
+                    <% } %>
+        
+        <% } %>
+
+        <% partsTaxF.toFixed(2)%>
+        <% partsTaxS.toFixed(2)%>
+        <% partsTaxT.toFixed(2)%>
+        <%itemBase .toFixed(1) %>
+
+    <div class="container-fluid">
+
+<div class="row">
+   
+    <div class="col-xs-7">
+
+        <% if (business.business_info.qr_code !== '') { %>
+            <img src="<%=  business.business_info.qr_code%>"
+                class="img-responsive ml-2" alt="QR Code" width="140px">
+                <!-- <span class="text-left ml-4 font-weight-bold font-15" style="color: black; padding-left: 0px;">To Pay Using any
+                    UPI enabled app
+            
+                </span> -->
+                <% } %>        
+    </div>
+    <div class="col-xs-3">
+
+    </div>
+        <div class="col-xs-2">
+           
+            <% if(partsTaxF !== 0) { %>                                   
+                                                <p style=" font-size: 13px; margin-top: -10px;">9% CGST : <%= partsTaxF.toLocaleString() %></p>
+                                                <p style=" font-size: 13px;  margin-top: -10px;">9% SGST : <%=  partsTaxF.toLocaleString() %></p>
+                                                
+                                                <% } if(partsTaxT !== 0) { %> 
+                                                <p style=" font-size: 13px;  margin-top: -10px;">2.5% CGST : <%=  partsTaxT.toLocaleString() %></p>
+                                                <p style=" font-size: 13px; margin-top: -10px;" >2.5% SGST : <%=  partsTaxT.toLocaleString() %></p>
+                                                <% } if(partsTaxS !== 0){ %> 
+                                                <p style=" font-size: 13px;  margin-top: -10px;">14% CGST : <%=  partsTaxS.toLocaleString() %> </p>
+                                                <p style=" font-size: 13px;  margin-top: -10px;">14% SGST :  <%=  partsTaxS.toLocaleString() %>  </p>
+                                            <% } %>
+                                            <p style=" font-size: 13px; font-weight: bold;">Sub Total : <%= p.due.toLocaleString() %>   </p>
+                                           
+
+
+   </div>        
+    </div>
+    <br><br> <br>
+
+
+    </div>
+    <br><br> 
+
+    <footer>
+        <div class="container"> 
+            <div class="row">
+    <div class="col-xs-4">
+    
+        <p style="text-align: left;">
+            Customer Signature
+        </p>
+    </div>
+        <div class="col-xs-5">
+            General Manager Signature
+        </div>
+    
+        <div class="col-xs-3">
+            <p style="text-align: center;"> 
+                Authorised Signature
+    
+            </p>
+        </div>
+        
+    
+    </div>
+    
+    
+                
+            </div>
+           
+    
+        
+    
+    
+    </footer>
+    
+    
+</body>
+</html>

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+</head>
+<body style="font-family: Roboto, sans-serif;;">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="text-center mb-0">
+                <h5  class="text-center" style="color: #000000; font-weight: bold;"><%= details.business.name %>
+                </h5>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="text-center mb-3">
+                <p style="color: #000000;">Phone no. :<%= details.business.contact_no %> , Email
+                    :<%= details.business.email %>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="text-center mb-3">
+                <h3 style="color: #000000; font-weight: bold;">Party Statement
+                </h3>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container"> 
+    <div class="row">
+        <div class="col-md-12">
+            <div class="text-md-left mb-0">
+                <h5 style="color: #000000; font-weight: bold;">Party Name : <%= details.party.name %>
+                </h5>
+            </div>
+
+        </div>
+        
+    </div>
+</div>
+<div class="container">
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="text-md-left mb-0">
+                <p style="color: #000000;">Phone no. : <%= details.party.contact_no %>
+                </p>
+            </div>
+        </div>
+    </div>
+    
+</div>
+<div class="container">
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="text-md-left mb-1">
+                <h5 style="color: #000000;"
+                >Duration : From <span style="color: #5875a0;">
+                        <%= `${moment(period.from).format('MMM DD, YYYY')}` %></span> To <span style="color: #557bb4;"><%= `${moment(period.to).format('MMM DD, YYYY')}` %>  <span>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+                    <!-- <h6 style="color: #000000;">Duration : From: {{query?.from }} -->
+
+                </h5>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table-responsive">
+                <table class="table table-invoice mt-4">
+                    <thead class="mb-1" style="background-color: lightgrey;
+                    border-bottom: 2px solid; height: 2.3rem;">
+                        <tr class="text-center">
+                            <!-- <th style="width:6%;">S.No.</th> -->
+                            <th style="width:18%;color: #000 !important;">Date</th>
+                            <th style="color: #000 !important;">Bill ID</th>
+                            <th style="color: #000 !important;" class="center-align table-header">Txn ID
+                            </th>
+                            <th style="color: #000 !important;" class="center-align table-header">Txn Type
+                            </th>
+                            <th style="color: #000 !important;" class="center-align table-header">Payment
+                                Mode</th>
+                            <th style="color: #000 !important;" class="center-align table-header">Bill
+                                Amount</th>
+                            <th style="color: #000 !important;" class="center-align table-header">Txn Amount
+                            </th>
+                            <th style="color: #000 !important;">Balance</th>
+                        </tr>
+                    </thead>
+
+                    
+                    
+                       
+                    <% for(var i=0; i < statements.length; i++) { %>
+                        
+                        <tr >
+                            
+                            <td style="color: #000 !important;"
+                                            style="width:18%;color: #000 !important;">
+                                            
+                                            <%  var dates = statements[i].transaction_date; %>
+                                                    
+                                                <%= `${moment(dates).format('MMMM DD, YYYY, h:mm:ss A')}` %>
+                                                
+                           
+                                        <td style="color: #000 !important;">
+                                       
+                                           <!-- Ext-<%= statements[i].bill_id %> -->
+                                           <% var purchase = statements[i].type == "Purchase"; %>
+                                           <% var sale = statements[i].type == "Sale"; %>
+                                         
+                                           <% if (purchase) { %>
+                                            <p> Ext-<%= statements[i].bill_id %></p>
+                                            <%} else if (sale) { %>
+                                                </p> Int-<%= statements[i].bill_id %></p>
+                                            <%}else { %>
+                                            <p> N/A </p>
+                                            <% } %>
+
+                                         
+                                           
+
+                                               
+                                        </td>
+                                       
+                                       
+
+                                        <td style="color: #000 !important;">
+                                            <!-- <% var txnId = statements[i].type == "Payment-In" || "Payment-Out"; %> -->
+                                            <!-- <% var sale = statements[i].type == "Sale"; %> -->
+
+                                            <% if ( statements[i].type == "Payment-In" || statements[i].type == "Payment-Out") { %>
+                                                <p><%= statements[i].transaction_id %></p>
+                                                <%} 
+                                                else { %>
+                                                <p> N/A </p>
+                                                <% } %>
+                                        
+                                        
+                                    
+                                    </td>
+                                        
+                                        <td style="color: #000 !important;"
+                                        ><%= statements[i].type %></td>
+
+                                        <td style="color: #000 !important;"
+                                        >
+                                        
+
+                                        <% if (statements[i].type == "Payment-In" || statements[i].type == "Payment-Out") { %>
+                                            <p><%= statements[i].payment_mode %></p>
+                                            <%} 
+                                            else { %>
+                                            <p> N/A </p>
+                                            <% } %>
+
+                                        
+                                        </td>
+
+                                        
+                                        <td style="color: #000 !important;"
+                                        >
+                                        
+
+                                        <% if (statements[i].type == "Payment-In" || statements[i].type == "Payment-Out") { %>
+                                            <p>N/A</p>
+                                            <%} 
+                                            else { %>
+                                            <p> <%= statements[i].bill_amount %></p>
+                                            <% } %>
+                                        </td>
+
+                                        <td style="color: #000 !important;"
+                                        
+                                        >
+                                        
+
+                                        <% if (statements[i].type == "Payment-In" || statements[i].type == "Payment-Out") { %>
+                                            <p><%= statements[i].transaction_amount %></p>
+                                            <%} 
+                                            else { %>
+                                                <p>N/A</p>
+                                            
+                                            <% } %>
+                                        
+                                        
+                                        
+                                    </td>
+
+                                        <td style="color: #000 !important;"
+                                        ><%= statements[i].balance %></td>
+                                        
+                                </tr>
+                                <% } %>
+                    </table>
+                    </div>
+                    </div>
+                    </div>
+                </div>
+
+                    <br> <div class="container">
+
+                   
+                                        <div class="float-left" style="padding-right: 5px;">
+                                            <h3   style="color: #000000; text-align: right;">Total Receivable
+                                                balance :
+                                                <%= details.balance %>
+                                               <!-- <%= console.log(details.balance) %> -->
+
+                                            </h3>
+                                        </div>
+                                    </div>
+               
+<br>
+<br>
+<br>
+
+
+                   
+</body>
+
+
+<footer>
+    <div class="container">
+    <div class="row ">
+        <div class="col-md-8" >
+        
+               <a href="https://business.autroid.com/"><span
+                                    style="color: blue!important;">business.autroid.com</span>
+                            </a>
+
+               
+</div>
+
+<div class="col-md-4" style="padding-right: 20px;">
+    <div ><img  src='https://careager.s3.ap-south-1.amazonaws.com/icon/logo3.png'
+    height="20px;"  style="float:right" ></div>
+    
+    </div>
+
+
+</div>
+
+</div>
+
+  </footer>
+</html>

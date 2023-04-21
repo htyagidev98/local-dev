@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    
+     <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"> -->
+    <title>Document</title>
+    <style type="text/css">
+     .text-muted {
+  color: grey !important; 
+}
+.myclass{
+  color: #948fe3 !important; 
+}
+.link{
+  color: blue !important;
+}
+
+  </style>
+</head>
+<body style="font-family: Roboto, sans-serif;">
+
+  <div class="container">
+      <div class="row">
+          <div class="col-xs-6">
+              <h3 style="font-size:large; font-weight: bold;"><%= business.name %></h3>
+              <p style="font-size: medium; margin-top: -5px" >Phone:<%= business.contact_no %></p>
+              <p style="font-size: medium; margin-top: -7px">Email: <%= business.email %></p>
+
+          </div>
+      </div>
+      <div class="text-center">
+        <h3 class="myclass">Payment Receipt</h3>
+      </div>
+
+      <div class="row">
+          <div class="col-xs-5">
+              <h4 > Received From :</h4>
+              <h4><%= user.name %></h4>
+              <p style="font-size: medium;">Contact No.: <%= user.contact_no %></p>
+              
+              <strong style="font-size: large; font-weight: bold;" class="text-muted">AMOUNT IN WORDS</strong>
+              <p style="font-size: medium; color: grey; margin-top: -2px;" class="text-muted"><%= total%> Rupees Only
+              </p>
+          </div>
+
+          <div class="col-xs-2">
+
+          </div>
+<!--           
+          <div class="col-xs-2">
+            <h4></h4>
+          <h4></h4>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <p style="font-size: medium;">
+            Received</p>  
+            <hr style="display: block;
+            height: 1px;
+            background: transparent;
+            width: 100%;
+            border: none;
+            border-top: solid 1px #aaa;">
+        </div> -->
+        <% var info  = payment.created_at; %>
+        <div class="col-xs-5">
+          <h4 style=" margin-left: 38px;">Received No.: <%= payment.transaction_id%></h4>    
+          <h4 style=" margin-left: 38px;">Date : <%=`${moment(info).format('YYYY-MM-DD')}`%> </h4>
+          <br>
+          <p style="font-size: medium; margin-left: -65px; margin-top: 12px;">  Received &nbsp &nbsp &nbsp   &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp                ₹ <%= payment.total%>
+            <hr style="display: block;
+        height: 0px;
+        background: transparent;
+        width: 100%;
+        margin-left: -65px;
+        margin-top: 9px;
+        border: none;
+        border-top: solid 1px #aaa;">
+          </p>
+        </div>
+
+      </div>
+      <div class="row">
+        <div class="col-xs-7">
+
+        </div>
+        <div class="col-xs-5">
+            <p style="font-size: medium; margin-left: 70px">For, <%= business.name%> </p> 
+            <br>
+            
+            <h4 style=" margin-left: 70px">Authorized Signatory</h4>
+        </div>
+        <!-- <div class="col-xs-3">
+
+        </div> -->
+      </div>
+
+  </div>  
+  <br> <br>
+  <br> <br>
+ 
+  <div class="my-log">
+   
+    <h4 style="font-weight: lighter; font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;text-align: right; ">Created on
+    </h4>
+    <img  src='https://careager.s3.ap-south-1.amazonaws.com/icon/logo3.png'
+    height="20px;"  style="float:right" >
+</div>
+  
+
+  
+</html>

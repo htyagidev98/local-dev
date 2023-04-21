@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parchi</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+<body style="font-family: Roboto, sans-serif;">
+
+    <div class="text-center"><h3>eParchi® / Challan</h3></div>
+<div class="container">
+    <div class="text-center">
+        <h2 style="font-family: Roboto, sans-serif;"> <%=parchi.business.name %></h2>
+        <p><%=parchi.business.address.address %></p>
+        <p style="margin-top: -7px"><%=parchi.business.contact_no %></p>
+
+    </div>
+    <div class="row">
+        <div class="col-xs-2">
+            <h5>Party Name :</h5>
+            <h5>eParchi :</h5>
+            <h5>Date :</h5>
+            <br>
+            <h5 style="margin-top: -5px">Party Balance : </h5>
+        </div>
+        <!-- <div class="col-xs-1">
+            
+        </div> -->
+        <div class="col-xs-3" style="font-weight: lighter; font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;">
+            <h5 ><%= parchi.user.name %></h5>
+            <h5 ><%= parchi.parchi_no %></h5>
+            <% var info  = parchi.created_at; %>
+            <h5><%=`${moment(info).format('MMM DD, YYYY h:mm A' )}` %></h5>
+            <br>
+            <h5 style="margin-top: -5px"><%= statement.balance %></h5>
+
+        </div>
+
+    </div>
+
+</div>
+<div class="container">
+
+    <div class="row">
+        <div class="col-xs-12">
+
+            <table class="table table" >
+                <thead class="mb-1" style="background-color: black;
+                border-bottom: 2px solid; height: 2.3rem;">
+                     <tr style="color:#000000!important">
+                        <th>Item</th>
+                        <th>Part Number</th>
+                        <th>Qty</th>
+                        <th>Rate</th>
+
+                        <th>Total</th>
+                    </tr>
+                    
+                </thead>
+                
+                <tbody class="text-muted">
+                   
+                   
+
+                       <% for(var i = 0; i<parchi.parts.length;i++){%>
+
+                       <tr style="color:#000000!important">
+                       <td width="32%">
+                        <%=parchi.parts[i].title %> 
+                       </td>
+                       
+                           
+                
+                        <td  width="32%">
+                            <%=parchi.parts[i].part_no %> 
+                            
+                        </td>
+                        
+                       
+                        <td width="8%">
+                            <%=parchi.parts[i].quantity %>   
+                           
+                        </td>
+                       
+                      <td width ='10%'> 
+                        ₹ <%=parchi.parts[i].selling_price.toFixed(2) %> 
+                      </td> 
+                     
+                        <td width="10%">
+                            ₹ <%=parchi.parts[i].amount.toFixed(2) %> 
+                               
+                            </td>
+                    
+                            </tr>
+                            
+                        <% }%>
+                   
+                </tbody>
+                </table>
+<hr style="display: block;
+        height: 1px;
+        background: transparent;
+        width: 100%;
+        border: none;
+        border-top: solid 1px rgb(8, 8, 8);">
+<div class="text-right">
+    <h4>₹ <%=parchi.payment.total.toFixed(2) %></h4> 
+</div>
+        </div>
+        
+    </div>
+<br> <br>
+    <div class="text-right">
+        <h4 style="font-weight: lighter; font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;">Created on
+        </h4>
+        <img  src='https://careager.s3.ap-south-1.amazonaws.com/icon/logo3.png'
+        height="20px;"  style="float:right" >
+    </div>
+
+
+</div>
+</body>
+</html>

@@ -1,0 +1,46 @@
+table(border=1 width= "100%" style = "border-collapse: collapse;")
+    each val, index in order
+        each v, i in val.items
+            tr
+                th(colspan=1 style="padding:5px 10px") Sold By:
+                td(colspan=3 style="padding:5px 10px") #{val.user.name} - #{val.user.contact_no}
+            tr  
+                th(colspan=1 style="padding:5px 10px") Delivery Date:
+                td(colspan=3 style="padding:5px 10px") #{v.date}
+            tr  
+                th(colspan=1 style="padding:5px 10px") Delivery Time:
+                td(colspan=4 style="padding:5px 10px") #{v.time_slot}
+            tr  
+                th(colspan=1 style="padding:5px 10px") Convenience:
+                td(colspan=4 style="padding:5px 10px") #{v.convenience}
+            tr  
+                th(colspan=1 style="padding:5px 10px") Address:
+                td(colspan=4 style="padding:5px 10px") #{val.address}
+            tr
+                th(style="padding:5px 10px") Items
+                th(style="padding:5px 10px") Quantity
+                th(style="padding:5px 10px") Cost
+                th(style="padding:5px 10px") Total
+
+                each v1,i1 in v.items
+                    tr
+                        td(style="padding:10px") #{v1.title}
+                            each v2,i2 in v1.services
+                                p - #{v2.service}
+                        td(style="padding:10px") #{v1.quantity}
+                        td(style="padding:10px") ₹ #{v1.cost}
+                        td(style="padding:10px") ₹ #{v1.total}
+
+
+        tr
+            td(colspan=3 style="padding:5px 10px") Total <br>(Note: Amount is tax inclusive)
+            td(style="padding:5px 10px")  ₹ #{val.payment.total} 
+        tr
+            td(colspan=3 style="padding:5px 10px") Discount (#{val.payment.discount_type})
+            td(style="padding:5px 10px") ₹ #{val.payment.discount_total} 
+        tr
+            td(colspan=3 style="padding:5px 10px") Paid
+            td(style="padding:5px 10px") ₹ #{val.payment.paid_total}
+        tr
+            td(colspan=3 style="padding:5px 10px") <b>Due
+            td(style="padding:5px 10px") ₹ #{val.due.due}

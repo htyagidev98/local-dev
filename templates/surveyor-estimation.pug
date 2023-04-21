@@ -1,0 +1,100 @@
+doctype html
+html
+    head
+        title
+    body
+        table(border='0', cellpadding='0', cellspacing='0', style='padding-bottom:20px;max-width:516px;min-width:220px;margin:auto;')
+            tbody
+                tr(align='center')
+                    td(style='width:8px', width='8')
+                    td
+                        div(align='center', style='border-style:solid;border-width:thin;border-color:#dadce0;border-radius:8px;padding:40px 20px')
+                            img(height='75', src='https://www.careager.com/images/cestatic/CarEager-HQ.png', style='width:75px;height:75px;margin-bottom:16px', width='75')
+                            div(style="font-family:'Google Sans',Roboto,RobotoDraft,Helvetica,Arial,sans-serif;border-bottom:thin solid #dadce0;color:rgba(0,0,0,0.87);line-height:32px;padding-bottom:24px;text-align:center;word-break:break-word")
+                                div(style='font-size:24px;font-weight: bolder;')
+                                    | CLAIM INTIMATION
+                                table(align='center', style='margin-top:8px')
+                                    tbody
+                                        tr(style='line-height:normal')
+                                            td
+                                                a(style="font-family:'Google Sans',Roboto,RobotoDraft,Helvetica,Arial,sans-serif;color:rgba(0,0,0,0.87);font-size:14px;line-height:20px;font-weight: bolder;") #{b.car} - #{b.registration_no}
+                            div(style='font-family:Roboto-Regular,Helvetica,Arial,sans-serif;font-size:14px;color:rgba(0,0,0,0.87);line-height:20px;padding-top:20px;text-align:left')
+                                table(border='0', cellpadding='0', cellspacing='0', style='border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;')
+                                    tbody
+                                        tr
+                                            th(width='60%') From:
+                                            th(width='30%')
+                                        tr
+                                            td 
+                                                p(style="font-weight:bolder;") #{b.workshop}
+
+                                                p(style="margin-top:0px") #{b.workshop_address}
+                                            td
+                                                table
+                                                    tbody
+                                                        tr
+                                                            td(width='50%')
+                                                                font(style='font-weight: bolder;') Date : 
+                                                            td #{b.date}
+                                                        tr
+                                                            td(width='50%')
+                                                                font(style='font-weight: bolder;') Place : 
+                                                            td #{b.workshop_state}
+                                                        tr
+                                                            td(width='50%')
+                                                                font(style='font-weight: bolder;') Time : 
+                                                            td #{b.time}
+                                br
+                                table(border='0', cellpadding='0', cellspacing='0', style='border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;')
+                                    tbody
+                                        tr
+                                            td(style='font-family: sans-serif; font-size: 14px; vertical-align: top;')
+                                                p(style='font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; margin-bottom: 15px;font-weight: bolder;') Dear Sir,
+                                                p(style='font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; margin-bottom: 15px;')
+                                                    | This is to inform you that vehicle with following particulars has met with an accident.
+                                                p(style='font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; margin-bottom: 15px;')
+                                                    
+                                                    | 1. Policy No : 
+                                                    font(style='font-weight:bolder;') #{b.policy_no}
+                                                p(style='font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; margin-bottom: 15px;')
+                                                    | 2. Vehicle No : 
+                                                    font(style='font-weight:bolder;') #{b.registration_no}
+                                                p(style='font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; margin-bottom: 15px;')
+                                                    | 3. Name of Insured/Owner : 
+                                                    font(style='font-weight:bolder;') #{b.policy_holder}
+                                                p(style='font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; margin-bottom: 15px;')
+                                                    | 4. Date & Time of accident : 
+                                                    font(style='font-weight:bolder;') #{b.accident_date}-#{b.accident_time}
+                                                p(style='font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; margin-bottom: 15px;')
+                                                    | 5. Place of accident : 
+                                                    font(style='font-weight:bolder;') #{b.accident_place}
+                                                p(style='font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; margin-bottom: 15px;')
+                                                    | 6. Place where vehicle is availabe for inspection : 
+                                                    font(style='font-weight:bolder;') #{b.workshop}
+                                                p(style='font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; margin-bottom: 15px;')
+                                                    | 7. Estimated Loss : 
+                                                    font(style='font-weight:bolder;') #{b.loss}
+                                                p(style='font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; margin-bottom: 15px;')
+                                                    | 8. Name of the driver who was driving at the time of accident  : 
+                                                    font(style='font-weight:bolder;') #{b.driver_accident}
+                                                p(style='font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; margin-bottom: 15px;')
+                                                    | 9. Spot Survey  : 
+                                                    font(style='font-weight:bolder;') #{b.spot_survey} 
+                                                p(style='font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; margin-bottom: 15px;')
+                                                    | 10. FIR  : 
+                                                    font(style='font-weight:bolder;') #{b.fir}
+                                                p(style='font-family: sans-serif; font-size: 14px; font-weight: bolder; margin: 0; margin-bottom: 15px;') Please Depute surveyor at the earliest.
+                                                p(style='font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; margin-bottom: 15px;margin-top:30px') Your Faithfully,
+                                                p(style="margin-top:0px;margin-bottom:0px;font-weight:bolder") #{b.advisor} (Advisor)
+                                                p(style="margin-top:0px;font-weight:bolder") #{b.advisor_contact}
+                            div(style='font-family:Roboto-Regular,Helvetica,Arial,sans-serif;font-size:14px;color:rgba(0,0,0,0.87);line-height:20px;padding-top:20px;text-align:left')
+                                div(style='text-align:center')
+                                    a(href="http://suite.careager.com/surveyor/estimate/"+b._id, style="font-family:'Google Sans',Roboto,RobotoDraft,Helvetica,Arial,sans-serif;line-height:16px;color:#ffffff;font-weight:400;text-decoration:none;font-size:14px;display:inline-block;padding:10px 24px;background-color:red;border-radius:5px;min-width:90px") Check Estimate
+                        div(style='text-align:left')
+                            div(style='font-family:Roboto-Regular,Helvetica,Arial,sans-serif;color:rgba(0,0,0,0.54);font-size:11px;line-height:18px;padding-top:12px;text-align:center')
+                                div(style='direction:ltr')
+                                    | @2019 
+                                    span Victorious Managers Technologies Private Limited
+                                    a(style='font-family: Roboto-Regular,Helvetica,Arial,sans-serif;color: rgba(0,0,0,0.54);font-size: 11px;line-height: 18px;padding-top: 0px;text-align: center;display: inline-flex;')
+                                        | 18/1, NH8, near Mercedes-Benz, Sector 35, Gurugram, Haryana 122004
+                    td(style='width:8px', width='8')
